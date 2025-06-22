@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rolo - El Gato</title>
+    <!-- Google Fonts - Fuentes similares a Comic Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -12,6 +15,7 @@
         }
 
         body {
+            /* Priorizar Comic Sans en PC */
             font-family: 'Comic Sans MS', cursive, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
@@ -31,7 +35,10 @@
         }
 
         h1 {
+            /* Mantener Comic Sans en PC para títulos */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             font-size: 4rem;
+            font-weight: bold;
             color: #fff;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
             margin-bottom: 20px;
@@ -42,6 +49,7 @@
         }
 
         .subtitle {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             font-size: 1.5rem;
             color: #fff;
             opacity: 0.9;
@@ -95,6 +103,7 @@
         }
 
         .card-title {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             font-size: 1.8rem;
             color: #333;
             margin-bottom: 10px;
@@ -102,6 +111,7 @@
         }
 
         .card-description {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             color: #666;
             text-align: center;
             line-height: 1.6;
@@ -116,6 +126,7 @@
         }
 
         .facts-title {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             font-size: 2.5rem;
             color: #333;
             text-align: center;
@@ -150,12 +161,22 @@
             transform: rotate(2deg) scale(1.05);
         }
 
+        .fact-item h3 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin-bottom: 8px;
+        }
+
+        .fact-item p {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
         .interactive-section {
             text-align: center;
             margin-bottom: 50px;
         }
 
         .pet-button {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             background: linear-gradient(135deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
@@ -179,6 +200,7 @@
         }
 
         .meow-counter {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             margin-top: 20px;
             font-size: 1.3rem;
             color: #fff;
@@ -198,10 +220,72 @@
         }
 
         footer {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             text-align: center;
             padding: 40px;
             color: #fff;
             font-size: 1.2rem;
+        }
+
+        /* Media queries para móviles - SOLO aquí cambiamos las fuentes */
+        @media screen and (max-width: 768px) {
+            /* En móviles, usar las fuentes web similares a Comic Sans */
+            body {
+                font-family: 'Kalam', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
+            }
+            
+            h1 {
+                font-family: 'Fredoka', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-family: 'Caveat', 'Trebuchet MS', sans-serif;
+                font-size: 1.2rem;
+            }
+
+            .card-title {
+                font-family: 'Fredoka', 'Trebuchet MS', sans-serif;
+            }
+
+            .card-description {
+                font-family: 'Kalam', 'Trebuchet MS', sans-serif;
+            }
+
+            .facts-title {
+                font-family: 'Fredoka', 'Trebuchet MS', sans-serif;
+            }
+
+            .fact-item h3 {
+                font-family: 'Fredoka', 'Trebuchet MS', sans-serif;
+            }
+
+            .fact-item p {
+                font-family: 'Kalam', 'Trebuchet MS', sans-serif;
+            }
+
+            .pet-button {
+                font-family: 'Fredoka', 'Trebuchet MS', sans-serif;
+            }
+
+            .meow-counter {
+                font-family: 'Caveat', 'Trebuchet MS', sans-serif;
+            }
+
+            footer {
+                font-family: 'Caveat', 'Trebuchet MS', sans-serif;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Detectar si Comic Sans está disponible */
+        @supports not (font-family: 'Comic Sans MS') {
+            body {
+                font-family: 'Kalam', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
+            }
         }
 
         /* Animaciones */
@@ -255,21 +339,6 @@
 
         .pulse {
             animation: pulse 0.5s ease-in-out;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
