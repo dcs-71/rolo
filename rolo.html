@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolo - El Gato Más Adorable</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: bounceInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transition: left 0.5s;
+        }
+
+        .photo-card:hover::before {
+            left: 100%;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .card-description {
+            color: #666;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .facts-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .facts-title {
+            font-size: 2.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .facts-title::after {
+            content: '🐾';
+            position: absolute;
+            right: -50px;
+            top: 0;
+            animation: bounce 2s infinite;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .fact-item {
+            background: linear-gradient(135deg, #ff9a56, #ffd89b);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: #333;
+            transition: transform 0.3s ease;
+        }
+
+        .fact-item:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        .interactive-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .pet-button {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pet-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.6);
+        }
+
+        .pet-button:active {
+            transform: translateY(0);
+        }
+
+        .meow-counter {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 2rem;
+            animation: floatUp 3s ease-out forwards;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        /* Animaciones */
+        @keyframes bounceInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0);
+            }
+            15% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.5);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐱 ROLO 🐱</h1>
+            <p class="subtitle">El dueño de Total Therapy</p>
+        </header>
+
+        <div class="gallery">
+            <div class="photo-card">
+                <img src="Rolo sentado.jpeg" alt="Rolo en el sillón">
+                <h3 class="card-title">👑 Rolo sentado</h3>
+                <p class="card-description">Aquí está Rolo sentado, Le gusta sentarse así, como si fuera pan. Se ve muy cómodo</p>
+            </div>
+
+            <div class="photo-card">
+                <img src="Rolo Total.jpeg" alt="Total Therapy Rolo">
+                <h3 class="card-title">💙 El corazón de Total</h3>
+                <p class="card-description">Rolo es el corazón de Total Therapy. Su presencia en Pueblo Libre siempre mejora nuestros días.</p>
+            </div>
+
+            <div class="photo-card">
+                <img src="Rolo supervisando.jpeg" alt="Rolo curioso">
+                <h3 class="card-title">👀 Supervisando</h3>
+                <p class="card-description">¡Siempre curioso! Rolo siempre está supervisando nuestro trabajo. Es el verdadero jefe en las sombras.</p>
+            </div>
+        </div>
+
+        <div class="facts-section">
+            <h2 class="facts-title">Datos Curiosos sobre Rolo</h2>
+            <div class="facts-grid">
+                <div class="fact-item">
+                    <h3>🖤 Color Favorito</h3>
+                    <p>Negro como su hermoso pelaje</p>
+                </div>
+                <div class="fact-item">
+                    <h3>👁️ Ojos</h3>
+                    <p>Verdes como esmeraldas brillantes</p>
+                </div>
+                <div class="fact-item">
+                    <h3>🔵 Collar Azul</h3>
+                    <p>Collar con cascabel para anunciar su llegada</p>
+                </div>
+                <div class="fact-item">
+                    <h3>😺 Personalidad</h3>
+                    <p>Rolo es muy inteligente y cariñoso</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <button class="pet-button" onclick="petRolo()">
+                🐾 ¡Acaricia a Rolo! 🐾
+            </button>
+            <div class="meow-counter">
+                Caricias recibidas: <span id="counter">0</span> 💕
+            </div>
+        </div>
+
+        <footer>
+            <p>💙 Rolo es un lindo gato 💙</p>
+        </footer>
+    </div>
+
+    <div class="floating-hearts" id="hearts-container"></div>
+
+    <script>
+        let petCount = 0;
+        const sounds = ['😻', '🥰', '😸', '😽', '🤗'];
+        
+        function petRolo() {
+            petCount++;
+            document.getElementById('counter').textContent = petCount;
+            
+            // Añadir clase de animación al botón
+            const button = document.querySelector('.pet-button');
+            button.classList.add('pulse');
+            setTimeout(() => button.classList.remove('pulse'), 500);
+            
+            // Crear corazones flotantes
+            createFloatingHeart();
+            
+            // Mostrar mensaje especial en ciertos números
+            if (petCount === 10) {
+                showSpecialMessage('¡Rolo está ronroneando! 🐱');
+            } else if (petCount === 25) {
+                showSpecialMessage('¡Rolo te quiere mucho! 💕');
+            } else if (petCount === 50) {
+                showSpecialMessage('¡Eres el mejor amigo de Rolo! 🌟');
+            }
+            
+            // Cambiar el color de fondo aleatoriamente
+            if (petCount % 5 === 0) {
+                changeBackgroundColor();
+            }
+        }
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = sounds[Math.floor(Math.random() * sounds.length)];
+            
+            // Posición aleatoria cerca del botón
+            const button = document.querySelector('.pet-button');
+            const buttonRect = button.getBoundingClientRect();
+            heart.style.left = (buttonRect.left + Math.random() * buttonRect.width) + 'px';
+            heart.style.top = (buttonRect.top + window.scrollY) + 'px';
+            
+            document.getElementById('hearts-container').appendChild(heart);
+            
+            // Remover el corazón después de la animación
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+        
+        function showSpecialMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+                color: white;
+                padding: 20px 40px;
+                border-radius: 20px;
+                font-size: 1.5rem;
+                z-index: 1000;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                animation: bounceInDown 0.6s ease-out;
+            `;
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.style.animation = 'floatUp 0.6s ease-out forwards';
+                setTimeout(() => messageDiv.remove(), 600);
+            }, 2000);
+        }
+        
+        function changeBackgroundColor() {
+            const colors = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+            ];
+            
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.background = randomColor;
+        }
+        
+        // Añadir partículas flotantes de fondo
+        function createBackgroundParticles() {
+            const particles = ['🐾', '💕', '⭐', '✨'];
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.cssText = `
+                    position: fixed;
+                    left: ${Math.random() * 100}vw;
+                    top: 100vh;
+                    font-size: ${Math.random() * 20 + 10}px;
+                    opacity: 0.7;
+                    pointer-events: none;
+                    z-index: -1;
+                    animation: floatUp 8s linear forwards;
+                `;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 8000);
+            }, 2000);
+        }
+        
+        // Iniciar partículas de fondo
+        createBackgroundParticles();
+        
+        // Efecto de entrada para las tarjetas
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.photo-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = 'bounceInDown 0.8s ease-out forwards';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
